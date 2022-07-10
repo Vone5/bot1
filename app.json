@@ -1,53 +1,58 @@
 {
-    "name": "Telegram Bot",
-    "description": "A simple PHP powered Telegram Bot",
-    "keywords": [
-        "PHP",
-        "Telegram",
-        "Bot"
-    ],
-    "website": "https://reboot13.hashnode.dev",
-    "repository": "{
-    "name": "Telegram Bot",
-    "description": "A simple PHP powered Telegram Bot",
-    "keywords": [
-        "PHP",
-        "Telegram",
-        "Bot"
-    ],
-    "website": "https://reboot13.hashnode.dev",
-    "repository": "https://github.com/Vone5/bot1",
-    "success_url": "/",
-    "env": {
-        "API_TOKEN": {
-            "description": "API Token , get it from @BotFather"
-        },
-        "CHAT": {
-           "description": "Enter Your Channel or Chat Username eg- @reboot13"
+  "name": "Small Sharp Tool",
+  "description": "This app does one little thing, and does it well.",
+  "keywords": [
+    "productivity",
+    "HTML5",
+    "scalpel"
+  ],
+  "website": "https://small-sharp-tool.com/",
+  "repository": "https://github.com/Vone5/bot1",
+  "logo": "https://small-sharp-tool.com/logo.svg",
+  "success_url": "/welcome",
+  "scripts": {
+    "postdeploy": "bundle exec rake bootstrap"
+  },
+  "env": {
+    "SECRET_TOKEN": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "WEB_CONCURRENCY": {
+      "description": "The number of processes to run.",
+      "value": "5"
     }
-    },
-    "formation": {
-        "web": {
-            "quantity": 1,
-            "size": "free"
-        }
-    },
-    "image": "heroku/php"
-}",
-    "success_url": "/",
-    "env": {
-        "API_TOKEN": {
-            "description": "API Token , get it from @BotFather"
-        },
-        "CHAT": {
-           "description": "Enter Your Channel or Chat Username eg- @reboot13"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "standard-1x"
     }
+  },
+  "image": "heroku/php",
+  "addons": [
+    "openredis",
+    {
+      "plan": "mongolab:shared-single-small",
+      "as": "MONGO"
     },
-    "formation": {
-        "web": {
-            "quantity": 1,
-            "size": "free"
-        }
-    },
-    "image": "heroku/php"
+    {
+      "plan": "heroku-postgresql",
+      "options": {
+        "version": "9.5"
+      }
+    }
+  ],
+  "buildpacks": [
+    {
+      "url": "https://github.com/stomita/heroku-buildpack-phantomjs"
+    }
+  ],
+  "environments": {
+    "test": {
+      "scripts": {
+        "test": "bundle exec rake test"
+      }
+    }
+  }
 }
